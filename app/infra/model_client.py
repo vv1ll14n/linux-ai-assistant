@@ -1,26 +1,48 @@
+import subprocess
+import json
+import re
+
 class ModelClient:
-    def ask(self, text: str):
-        text = text.lower()
+    def ask(self, user_input: str) -> dict:
+        prompt = self._build_prompt(user_input)
 
-        if "arquivo" in text and "grande" in text:
+        result = subprocess.run(
+            ["ollama", "run", "mistral"],
+            input=prompt,
+            capture_output=True,
+            text=True
+        )
+
+        output = result.stdout.strip()
+        return self._parse_response(output)
+
+    def _build_prompt(self, user_input: str) -> str:
+        return f"""
+Você é um assistente especialista em Linux Ubuntu.
+
+Regras obrigatórias:
+- Responda APENAS em JSON válido
+- Não explique fora do JSON
+- O comando deve ser seguro
+- Não execute comandos destrutivos
+
+Formato da resposta:
+{{
+  "command": "comando linux",
+  "explanation": "explicação curta"
+}}
+
+Solicitação do usuário:
+{user_input}
+"""
+
+    def _parse_response(self, text: str) -> dict:
+        try:
+            json_text = re.search(r"\{.*\}", text, re.DOTALL).group()
+            return json.loads(json_text)
+        except Exception:
             return {
-                "command": "du -ah . | sort -rh | head -n 10",
-                "explanation": "Lista os 10 maiores arquivos e diretórios no diretório atual."
+                "command": "echo 'Erro ao interpretar resposta da IA'",
+                "explanation": "A IA retornou um formato inesperado."
             }
 
-        if "espaço" in text or "disco" in text:
-            return {
-                "command": "df -h",
-                "explanation": "Mostra o uso de espaço em disco de forma legível."
-            }
-
-        if "processo" in text:
-            return {
-                "command": "ps aux --sort=-%mem | head",
-                "explanation": "Lista os processos que mais consomem memória."
-            }
-
-        return {
-            "command": "echo 'Não consegui entender a solicitação'",
-            "explanation": "A frase informada ainda não está mapeada no MVP."
-        }
