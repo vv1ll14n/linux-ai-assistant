@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jarvis • Assistente Inteligente para Linux</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+  </style>
+</head>
+<body class="bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-slate-100">
+
+  <!-- Header -->
+  <header class="max-w-7xl mx-auto px-6 py-8 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-xl bg-cyan-500/20 flex items-center justify-center text-cyan-400 font-black">J</div>
+      <span class="text-xl font-bold">Jarvis</span>
+    </div>
+    <nav class="hidden md:flex gap-8 text-sm text-slate-300">
+      <a href="#features" class="hover:text-cyan-400">Funcionalidades</a>
+      <a href="#architecture" class="hover:text-cyan-400">Arquitetura</a>
+      <a href="#install" class="hover:text-cyan-400">Instalação</a>
+      <a href="#github" class="hover:text-cyan-400">GitHub</a>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section class="max-w-7xl mx-auto px-6 py-24 grid md:grid-cols-2 gap-16 items-center">
+    <div>
+      <h1 class="text-5xl md:text-6xl font-extrabold leading-tight">
+        O terminal Linux,
+        <span class="text-cyan-400">finalmente inteligente</span>
+      </h1>
+      <p class="mt-6 text-lg text-slate-300">
+        Jarvis é um assistente de IA para Linux Ubuntu que entende linguagem natural
+        e sugere comandos seguros, explicando exatamente o que cada comando faz.
+      </p>
+      <div class="mt-10 flex gap-4">
+        <a href="#install" class="px-6 py-3 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-semibold transition">
+          Começar agora
+        </a>
+        <a href="#github" class="px-6 py-3 rounded-xl border border-slate-700 hover:border-cyan-400 transition">
+          Ver no GitHub
+        </a>
+      </div>
+    </div>
+
+    <div class="bg-slate-900/60 rounded-2xl p-6 shadow-2xl border border-slate-800">
+      <pre class="text-sm text-slate-200"><code>$ jarvis "listar arquivos grandes"
+
+💡 Sugestão de comando:
+
+du -ah . | sort -rh | head -n 10
+
+📖 Explicação:
+Lista os maiores arquivos e diretórios
+no diretório atual.</code></pre>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section id="features" class="max-w-7xl mx-auto px-6 py-24">
+    <h2 class="text-4xl font-bold text-center mb-16">Funcionalidades</h2>
+    <div class="grid md:grid-cols-3 gap-10">
+      <div class="p-8 rounded-2xl bg-slate-900/60 border border-slate-800">
+        <h3 class="text-xl font-semibold text-cyan-400">Linguagem Natural</h3>
+        <p class="mt-4 text-slate-300">Descreva o que você quer fazer. Jarvis traduz isso para comandos Linux reais.</p>
+      </div>
+      <div class="p-8 rounded-2xl bg-slate-900/60 border border-slate-800">
+        <h3 class="text-xl font-semibold text-cyan-400">IA Local (Offline)</h3>
+        <p class="mt-4 text-slate-300">Utiliza Ollama com LLM local, sem custos e sem depender da internet.</p>
+      </div>
+      <div class="p-8 rounded-2xl bg-slate-900/60 border border-slate-800">
+        <h3 class="text-xl font-semibold text-cyan-400">Segurança em Primeiro Lugar</h3>
+        <p class="mt-4 text-slate-300">Comandos destrutivos são automaticamente bloqueados antes de qualquer execução.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Architecture -->
+  <section id="architecture" class="bg-slate-900/40 border-y border-slate-800">
+    <div class="max-w-7xl mx-auto px-6 py-24">
+      <h2 class="text-4xl font-bold text-center mb-16">Arquitetura</h2>
+      <div class="max-w-3xl mx-auto bg-slate-950 rounded-2xl p-8 border border-slate-800">
+        <pre class="text-sm text-slate-300"><code>CLI (Jarvis)
+   ↓
+Controller
+   ↓
+Service (IA)
+   ↓
+ModelClient
+   ↓
+Ollama (LLM Local)</code></pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- Install -->
+  <section id="install" class="max-w-7xl mx-auto px-6 py-24">
+    <h2 class="text-4xl font-bold text-center mb-16">Instalação Rápida</h2>
+    <div class="grid md:grid-cols-2 gap-10">
+      <div class="bg-slate-900/60 rounded-2xl p-8 border border-slate-800">
+        <h3 class="font-semibold mb-4">Instalar Ollama</h3>
+        <pre class="text-sm"><code>curl -fsSL https://ollama.com/install.sh | sh
+ollama pull mistral</code></pre>
+      </div>
+      <div class="bg-slate-900/60 rounded-2xl p-8 border border-slate-800">
+        <h3 class="font-semibold mb-4">Executar Jarvis</h3>
+        <pre class="text-sm"><code>jarvis "ver espaço em disco"</code></pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer id="github" class="border-t border-slate-800">
+    <div class="max-w-7xl mx-auto px-6 py-10 flex flex-col md:flex-row justify-between items-center gap-6">
+      <p class="text-slate-400">© 2026 Jarvis — Assistente Inteligente para Linux</p>
+      <a href="#" class="text-cyan-400 hover:underline">GitHub Repository</a>
+    </div>
+  </footer>
+
+</body>
+</html>
